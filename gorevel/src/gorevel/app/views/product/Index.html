@@ -1,0 +1,53 @@
+{{set . "title" "项目案例"}}
+
+{{template "header.html" .}}
+
+<div class="container fixed">
+	<div class="row row-fixed">
+		<div class="span9">
+			<div class="page-header">
+			</div>
+
+			{{range .products}}
+			<div class="row-fluid">
+				<ul class="thumbnails">
+					<li class="span4">
+						<a href="{{.GetImage}}" target="_blank" class="thumbnail"><img src="{{.GetImage}}?imageMogr/v2/thumbnail/220x170!" style="width: 220px; height: 170px;"><a>
+					</li>
+
+					<li class="span8">
+						<h3><a href="{{.Site}}" target="_blank">{{.Name}}</a>
+							{{if eq $.user.Id .User.Id}}
+							<a href="{{url "Product.Edit" .Id}}"><i class="icon-edit"></i></a>
+							{{end}}
+
+							{{if .Repository}}
+							<span class="label label-warning pull-right"><a href="{{.Repository}}" target="_blank" style="color:white;">开源</a></span>
+							{{else}}
+							<span class="label pull-right">闭源</span>
+							{{end}}
+						</h3>
+
+						<p>{{raw .Description}}</p>
+
+						<address>
+						<strong>作者：</strong>{{.Author}}<br>
+						<strong>官网：</strong><a href="{{.Site}}" target="_blank">{{.Site}}</a><br>
+						{{if .Repository}}
+						<strong>仓库：</strong><a href="{{.Repository}}" target="_blank">{{.Repository}}</a><br>
+						{{end}}
+						<small class="muted pull-right">{{.User.Name}} · {{date .Created}}</small>
+						</address>
+					</li>
+				</ul>
+			</div>
+			{{end}}
+		</div>
+
+		<div class="span3">
+			{{template "product/sidebar.html" .}}
+		</div>
+	</div>
+</div>
+
+{{template "footer.html" .}}

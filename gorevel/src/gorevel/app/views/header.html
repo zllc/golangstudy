@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{if .title}}{{.title}} - {{end}}Revel 中文社区</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="Revel, Revel社区, Revel中文社区, Revel论坛, Revel框架, GoWeb框架, gorevel, Revel, revel, Go, go, golang, Golang">
+	<meta name="description" content="Revel中文社区是一个开源的 Go 语言 Revel Web 框架技术交流平台。">
+	<link rel="shortcut icon" href="{{.qiniuDomain}}/public/img/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="{{.qiniuDomain}}/public/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{.qiniuDomain}}/public/css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" type="text/css" href="{{.qiniuDomain}}/public/css/journal.min.css">
+	<link rel="stylesheet" type="text/css" href="{{.qiniuDomain}}/public/css/revel.css">
+	<link rel="stylesheet" type="text/css" href="{{.qiniuDomain}}/public/css/prettify.css">
+	<link rel="stylesheet" type="text/css" href="{{.qiniuDomain}}/public/css/custom.css">
+	<script src="{{.qiniuDomain}}/public/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" rel="stylesheet" type="text/css"> -->
+
+	{{range .moreStyles}}
+		<link rel="stylesheet" type="text/css" href="{{$.qiniuDomain}}/public/{{.}}">
+	{{end}}
+
+</head>
+<body onload="prettyPrint()">
+	{{ if eq .title ""}}
+		<a href="https://github.com/goofcc/gorevel" target="_blank" >
+			<img style="position: fixed; top: 0; right: 0; border: 0; z-index:1000;" src="{{.qiniuDomain}}/public/img/forkme_right_orange_ff7600.png" alt="Fork me on GitHub">
+		</a>
+	{{end}}
+	<div class="navbar navbar-fixed-top" style="z-index:999;">
+		<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="{{url "App.Index"}}">
+			<img class="revel-hat-img" src="{{.qiniuDomain}}/public/img/revelhat.png" height="40" width="87"></a>
+
+			<div class="nav-collapse">
+			<ul class="nav">
+				<li {{if eq .active "Topic"}}class="active"{{end}}><a href="{{url "Topic.Index"}}">社区</a></li>
+				<li {{if eq .active "Product"}}class="active"{{end}}><a href="{{url "Product.Index"}}" title="Revel项目案例">案例</a></li>
+				<li><a href="/docs/index.html" target="_blank" title="本站文档">文档</a><img src="{{.qiniuDomain}}/public/img/hot.gif" style="position:relative;top:-40px;left:33px;" /></li>
+				<li><a href="http://revel.github.io/" target="_blank" title="官方文档">godoc</a></li>
+			</ul>
+
+			<ul class="nav pull-right">
+				{{if .user}}
+					<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{.user.Name}}<b class="caret"></b></a>
+					<ul class="dropdown-menu" style="max-width:10px;">
+						{{if .user.IsAdmin}}
+							<li><a href="{{url "Admin.Index"}}"><i class="icon-cog"></i>后台管理</a></li>
+						{{end}}
+						<li><a href="{{url "User.Edit"}}"><i class="icon-edit"></i>个人信息</a></li>
+						<li><a href="{{url "User.Signout"}}"><i class="icon-off"></i>退出</a></li>
+					</ul>
+					</li>
+				{{else}}
+					<li><a href="{{url "User.Signin"}}">登录</a></li>
+					<li><a href="{{url "User.Signup"}}">注册</a></li>
+				{{end}}
+			</ul>
+			</div>
+		</div>
+		</div>
+	</div>
